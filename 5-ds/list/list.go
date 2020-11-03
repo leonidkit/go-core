@@ -52,10 +52,24 @@ func (l *List) String() string {
 
 // Pop удаляет первый элемент списка.
 func (l *List) Pop() *List {
+	elem := l.root.next
+	l.root.next = elem.next
+
 	return l
 }
 
 // Reverse разворачивает список.
 func (l *List) Reverse() *List {
+	cursor := &l.root
+	prev := new(Elem)
+
+	for cursor != nil {
+		next := cursor.next
+
+		cursor.next = prev
+		prev = cursor
+
+		cursor = next
+	}
 	return l
 }
